@@ -41,7 +41,7 @@ public void displayMovies(){
 }
 public void displayTopRatedMovies(){
     System.out.println("Top rated movies");
-    for(int i=0;i<Math.min(5, movieList.size())); i++){
+    for(int i=0;i<Math.min(5, movieList.size()); i++){
         System.out.println(movieList.get(i));
     }
 }
@@ -59,5 +59,50 @@ public void run(){
         choice=scanner.nextInt();
         scanner.nextLine();
     }
+    switch(choice){
+        case 1:
+            System.out.print("Enter movie title");
+            String title=scanner.nextLine();
+            System.out.print("Enter movie director: ");
+            String director = scanner.nextLine();
+            System.out.print("Enter release year: ");
+            int releaseYear = scanner.nextInt();
+            addMovie(title, director, releaseYear);
+            System.out.println("Movie added successfully!");
+            break;
+        case 2:
+            System.out.print("Enter movie title to rate: ");
+            String rateTitle = scanner.nextLine();
+            System.out.print("Enter rating (out of 10): ");
+            double newRating = scanner.nextDouble();
+            rateMovie(rateTitle, newRating);
+            break;
+        case 3:
+            System.out.print("Enter movie title to search: ");
+            String searchTitle = scanner.nextLine();
+            Movie foundMovie = searchMovie(searchTitle);
+            if (foundMovie != null) {
+                System.out.println("Movie found: " + foundMovie);
+            } else {
+                System.out.println("Movie not found.");
+            }
+            break;
+        case 4:
+            System.out.println("List of all movies:");
+            displayMovies();
+            break;
+        case 5:
+            displayTopRatedMovies();
+            break;
+        case 6:
+            System.out.println("Exiting program...");
+            break;
+        default:
+            System.out.println("Invalid choice. Please enter again.");
+    }
+}
+public static void main(String[] args) {
+    MovieRecommendationSystem system=new MovieRecommendationSystem();
+    system.run();
 }
 }
